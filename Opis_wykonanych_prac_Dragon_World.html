@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Dragon World — opis wykonanych prac</title>
+<style>
+  body { font-family: "Times New Roman", Times, serif; font-size: 12pt; line-height: 1.45; }
+  h1 { font-size: 18pt; text-align: center; }
+  h2 { font-size: 14pt; margin-top: 18pt; }
+  h3 { font-size: 13pt; margin-top: 14pt; }
+  p { margin: 0 0 8pt 0; text-align: justify; }
+  .center { text-align: center; }
+  ul, ol { margin-top: 0; }
+  li { margin-bottom: 4pt; }
+  table { border-collapse: collapse; width: 100%; margin: 8pt 0 12pt 0; }
+  th, td { border: 1px solid #000; padding: 4pt 6pt; vertical-align: top; font-size: 11pt; }
+  th { background: #f2f2f2; }
+</style>
+</head>
+<body>
+
+<p class="center"><b>Praca dyplomowa — część praktyczna</b></p>
+<h1>Projekt i implementacja sklepu internetowego Dragon World</h1>
+<p class="center">Opis wykonanych prac: co zostało zrealizowane i w jaki sposób działa</p>
+
+<h2>1. Przedmiot pracy</h2>
+<p>Przedmiotem części praktycznej jest aplikacja internetowa Dragon World — sklep z asortymentem o tematyce smoków i fantasy. Oferta jest podzielona na pięć kategorii: figurki smoków, biżuterię, plakaty, odzież oraz książki. Klient może przeglądać katalog, wyszukiwać towar, zakładać konto, odkładać produkty do schowka, wystawiać opinie, składać zamówienie i pobierać fakturę. Osobno przygotowano panel pracownika i panel administratora. W sklepie działa także doradca w oknie czatu: najpierw sam wybiera pasujące produkty z katalogu, a następnie układa z nich krótką odpowiedź po polsku. Dodatkowo na stronach sklepu umieszczono czytnik treści, który odczytuje widoczny tekst na głos.</p>
+<p>Interfejs użytkownika jest w języku polskim. Aplikacja działa lokalnie w środowisku XAMPP i korzysta z bazy Microsoft SQL Server o nazwie dragon_world. Parametry połączenia z bazą oraz klucz usługi językowej nie są wpisane w strony sklepu — odczytuje je wspólny plik konfiguracyjny.</p>
+
+<h2>2. Cel i zakres wykonanych prac</h2>
+<p>Celem było zbudowanie działającego sklepu z podziałem uprawnień, pełną ścieżką zakupu oraz mechanizmem, który pomaga klientowi znaleźć towar, a pracownikowi — ocenić sprzedaż. Zrealizowano:</p>
+<ul>
+<li>stronę główną z banerem, suwakiem produktów, kategoriami, wyszukiwarką i licznikiem koszyka,</li>
+<li>stronę kategorii oraz kartę towaru ze zdjęciem, ceną, opisem i opiniami,</li>
+<li>rejestrację, logowanie, wylogowanie i rozróżnienie ról: klient, pracownik, administrator,</li>
+<li>konto klienta: dane osobowe, zdjęcie profilowe, zmiana hasła i adresy dostawy,</li>
+<li>schowek (ulubione) oraz opinie z oceną gwiazdkową,</li>
+<li>koszyk i proces zamówienia: dostawa, płatność, podsumowanie, zapis zamówienia, potwierdzenie,</li>
+<li>historię zamówień i fakturę PDF,</li>
+<li>zapis wyświetleń produktów oraz rekomendacje na podstawie tego, co klient już oglądał,</li>
+<li>czat doradcy, który zawęża katalog i odpowiada przy pomocy modelu językowego,</li>
+<li>panel pracownika: dodawanie, edycja i usuwanie produktów, moderacja opinii, statystyki sprzedaży,</li>
+<li>panel administratora: zamówienia, konta użytkowników, produkty, opinie, analiza sprzedaży i statystyki czatu,</li>
+<li>czytnik strony dla osób, które wolą odsłuchać treść zamiast ją czytać.</li>
+</ul>
+
+<h2>3. Zastosowane technologie</h2>
+<p>Część serwerowa jest napisana w PHP. Połączenie z SQL Server odbywa się przez PDO i sterownik sqlsrv. Zapytania, które przyjmują dane od użytkownika, są parametryzowane, więc wartość z formularza nie jest doklejana do tekstu zapytania. Hasła nie są zapisywane jawnym tekstem: przy rejestracji powstaje skrót, a przy logowaniu podane hasło jest porównywane z tym skrótem.</p>
+<p>Strony składają się z HTML, CSS i JavaScript. Układ korzysta z Bootstrapa, czcionki Julee oraz ikon Font Awesome. Zalogowany użytkownik, wybrana dostawa, płatność, adres i identyfikator rozmowy z doradcą są trzymane w sesji PHP. Dzięki temu kolejne strony zamówienia wiedzą, co klient wybrał wcześniej, bez ponownego wpisywania tych danych.</p>
+<p>Faktura jest najpierw składana jako prosty dokument HTML, a potem zamieniana na PDF biblioteką Dompdf. Doradca sklepu wysyła krótką listę już wybranych produktów do usługi OpenRouter (model openai/gpt-4o-mini). Katalog, z którego doradca korzysta, jest osobnym plikiem JSON odświeżanym po dodaniu, zmianie albo usunięciu towaru. W projekcie jest też niewielki serwer Node.js, który może przekazywać zapytania czatu, ale główna ścieżka sklepu działa przez PHP.</p>
+
+<h2>4. Architektura i podział ról</h2>
+<p>Aplikacja jest podzielona na katalogi odpowiadające obszarom sklepu: strona główna, kategorie, karta towaru, rejestracja i logowanie, konto klienta, panel pracownika oraz panel administratora. Zdjęcia produktów leżą w katalogu FOTO. Każda strona panelu na początku sprawdza sesję. Jeżeli nie ma zalogowanego użytkownika albo jego rola nie pasuje do panelu, przeglądarka jest odsyłana poza ten panel.</p>
+<p>Rola jest zapisana przy koncie w bazie i po zalogowaniu trafia do sesji:</p>
+<ul>
+<li><b>klient</b> — przegląda sklep, prowadzi koszyk i schowek, składa zamówienia, wystawia opinie i korzysta z czatu. Nowe konto z formularza rejestracji zawsze dostaje tę rolę.</li>
+<li><b>pracownik</b> — po zalogowaniu trafia do panelu produktów. Dodaje i edytuje towary, usuwa opinie oraz ogląda statystyki sprzedaży.</li>
+<li><b>administrator</b> — widzi zamówienia, zakłada konta i zmienia role, edytuje ofertę, moderuje opinie oraz otwiera analizę sprzedaży i statystyki rozmów.</li>
+</ul>
+<p>Administrator nie może przez przypadek odebrać roli samemu sobie ani usunąć własnego konta. Przy edycji własnego rekordu rola pozostaje bez zmian.</p>
+
+<h2>5. Baza danych</h2>
+<p>Dane trwałe są w bazie dragon_world. Poniżej opisano, do czego służy każda ważna tabela i jak tabele łączą się ze sobą.</p>
+<table>
+<tr><th>Tabela</th><th>Co przechowuje i jak jest używana</th></tr>
+<tr><td>Użytkownicy</td><td>Imię, nazwisko, e-mail, skrót hasła, rola, zdjęcie profilowe i data utworzenia. E-mail służy do logowania i nie może się powtarzać.</td></tr>
+<tr><td>kategoria</td><td>Nazwy pięciu kategorii oferty. Produkt wskazuje na jedną kategorię.</td></tr>
+<tr><td>Produkty</td><td>Nazwa, cena, opis, ścieżka zdjęcia i identyfikator kategorii. To główny katalog sklepu.</td></tr>
+<tr><td>koszyk</td><td>Pozycje jeszcze niekupione: klient, produkt, ilość i data dodania. Po złożeniu zamówienia wiersze tego klienta są usuwane.</td></tr>
+<tr><td>Adresy_dostawy</td><td>Ulica, miasto, województwo, kod pocztowy, kraj oraz znacznik adresu domyślnego. Jeden klient może mieć kilka adresów, ale tylko jeden jest domyślny.</td></tr>
+<tr><td>Typ_dostawy</td><td>Nazwa sposobu dostawy, cena i flaga aktywności. Wybór klienta jest zapamiętywany przy zamówieniu.</td></tr>
+<tr><td>Metoda_platnosci</td><td>Nazwa metody i flaga aktywności. Do zamówienia trafia tylko metoda oznaczona jako aktywna.</td></tr>
+<tr><td>Zamowienia</td><td>Nagłówek: klient, łączna cena, data, status, metoda płatności, typ dostawy i adres. Nowe zamówienie dostaje status „nowe”.</td></tr>
+<tr><td>zamowienia_produkty</td><td>Pozycje zamówienia: produkt, ilość oraz cena z chwili zakupu. Cena jest kopiowana z katalogu, więc późniejsza zmiana ceny towaru nie zmienia starego zamówienia.</td></tr>
+<tr><td>Faktury</td><td>Numer faktury powiązany z jednym zamówieniem oraz data wystawienia.</td></tr>
+<tr><td>opinie</td><td>Autor, produkt, treść, liczba gwiazdek, data i status. Nowa opinia powstaje ze statusem oczekującym.</td></tr>
+<tr><td>Ulubione_towary</td><td>Para klient–produkt. To schowek, niezależny od koszyka.</td></tr>
+<tr><td>viewed_products</td><td>Każde wejście na kartę towaru: kto, co, kiedy i skąd (karta, czat albo suwak). Ten sam produkt może mieć wiele wpisów, bo liczone są kolejne odwiedziny.</td></tr>
+<tr><td>SesjeCzatu</td><td>Jedna rozmowa zalogowanego klienta. Identyfikator rozmowy jest też trzymany w sesji przeglądarki.</td></tr>
+<tr><td>Wiadomości</td><td>Tekst klienta albo odpowiedź doradcy oraz, przy odpowiedzi, lista zaproponowanych produktów.</td></tr>
+</table>
+
+<h2>6. Strona główna i katalog</h2>
+<h3>6.1. Nagłówek i licznik koszyka</h3>
+<p>Na górze strony jest nazwa sklepu, menu kategorii, pole wyszukiwania oraz skróty do konta, schowka i koszyka. Liczba przy koszyku to suma ilości wszystkich pozycji zalogowanego klienta, a nie liczba różnych produktów. Gość bez konta nie ma tej liczby, bo koszyk jest przypisany do użytkownika w bazie, a nie do przeglądarki.</p>
+<p>Pod menu znajduje się baner z krótkim opisem sklepu. Dalej jest suwak ze zdjęciami produktów. Kliknięcie slajdu otwiera kartę towaru i oznacza źródło wejścia jako suwak, żeby później dało się je odróżnić od wejścia z czatu albo ze zwykłej listy.</p>
+
+<h3>6.2. Wyszukiwarka</h3>
+<p>Wyszukiwarka działa bez przeładowania całej strony. Tekst z pola trafia do skryptu, który szuka produktów po nazwie i zwraca krótką listę. Wynik pojawia się jako podpowiedzi. Z podpowiedzi można przejść od razu na kartę towaru. Osobne skrypty pobierają najnowsze produkty oraz produkty wybranej kategorii i wstawiają je jako karty na stronie.</p>
+
+<h3>6.3. Kategoria i karta towaru</h3>
+<p>Wejście w kategorię otwiera stronę z towarem o danym identyfikatorze kategorii. Karta towaru pokazuje nazwę, cenę, opis, zdjęcie oraz opinie. Na górze karty jest też zbiorcza ocena: liczba opinii i średnia liczba gwiazdek. Stąd klient dodaje produkt do koszyka albo do schowka.</p>
+<p>Dodanie do koszyka wymaga zalogowania. Jeżeli ten produkt już leży w koszyku, ilość jest zwiększana. Jeżeli nie — powstaje nowa pozycja z datą dodania. Po udanym dodaniu odświeżany jest licznik w nagłówku. Przy pierwszym wejściu na kartę, dla zalogowanego klienta, zapisywane jest wyświetlenie: identyfikator użytkownika, identyfikator produktu, czas oraz źródło. Źródłem może być zwykła karta, czat albo suwak na stronie głównej.</p>
+
+<h2>7. Czytnik treści strony</h2>
+<p>Na stronach sklepu działa czytnik oparty na syntezie mowy wbudowanej w przeglądarkę. W prawym dolnym rogu jest panel z przyciskami: czytaj stronę, pauza, wznów i zatrzymaj, oraz suwak prędkości od połowy normalnego tempa do podwójnego.</p>
+<p>Po uruchomieniu czytnik zbiera elementy widoczne na stronie i pomija własne przyciski, skrypty oraz style. Dla zwykłego tekstu czyta treść elementu. Dla obrazka czyta tekst alternatywny. Dla pola formularza czyta podpowiedź albo wpisaną wartość, a dla listy wyboru wylicza dostępne opcje. Czytanie idzie element po elemencie. Aktualnie czytany fragment jest podświetlany, a po dokończeniu podświetlenie znika. Jeżeli w systemie jest głos polski, używany jest ten głos i język polski. Pauza zatrzymuje mowę w miejscu, wznowienie kontynuuje, a zatrzymanie kasuje kolejkę i zdejmuje podświetlenie.</p>
+
+<h2>8. Rejestracja, logowanie i konto</h2>
+<h3>8.1. Rejestracja</h3>
+<p>Formularz zbiera imię, nazwisko, adres e-mail i hasło. Przed zapisem skrypt sprawdza, czy taki e-mail już istnieje. Hasło jest zamieniane na skrót, rola jest ustawiana na klienta, a data utworzenia jest brana z serwera bazy. Po udanym zapisie dane użytkownika trafiają do sesji, więc klient jest od razu zalogowany i nie musi wpisywać hasła drugi raz.</p>
+
+<h3>8.2. Logowanie i wylogowanie</h3>
+<p>Logowanie przyjmuje e-mail i hasło, znajduje konto po e-mailu i porównuje hasło ze skrótem. Przy sukcesie w sesji lądują identyfikator, e-mail, imię, nazwisko, rola i zdjęcie. Pracownik jest kierowany do panelu produktów. Klient i administrator wracają do sklepu; administrator wchodzi do swojego panelu osobnym adresem. Wylogowanie czyści sesję i odsyła na stronę logowania.</p>
+
+<h3>8.3. Moje dane</h3>
+<p>Zalogowany klient widzi imię, nazwisko, e-mail i zdjęcie. Może wgrać własne zdjęcie w formacie JPEG, PNG albo GIF. Plik jest sprawdzany po typie, zapisywany na serwerze, a w koncie aktualizowana jest ścieżka. Jeżeli zdjęcia nie ma, pokazywany jest obraz domyślny.</p>
+<p>Zmiana hasła wymaga podania dotychczasowego. Zanim formularz zostanie wysłany, skrypt sprawdza stare hasło i pokazuje komunikat, gdy jest niepoprawne. Nowe hasło jest zapisywane jako nowy skrót, a nie jako tekst.</p>
+<p>Na tej samej stronie klient prowadzi adresy dostawy. Adres składa się z ulicy, miasta, województwa, kodu pocztowego i kraju. Nowy adres może być oznaczony jako domyślny. Przy ustawieniu domyślnego najpierw zdejmowany jest ten znacznik ze wszystkich adresów klienta, a potem nadawany wybranemu, więc nigdy nie ma dwóch adresów domyślnych naraz. Adres można usunąć. Lista jest sortowana tak, aby adres domyślny był pierwszy, a pozostałe — od najnowszego.</p>
+
+<h2>9. Schowek</h2>
+<p>Schowek jest osobny od koszyka. Zapisanie produktu wymaga zalogowania; gość jest odsyłany do logowania. Skrypt sprawdza, czy para klient–produkt już istnieje, i dodaje ją tylko wtedy, gdy jej nie ma. Usunięcie kasuje właśnie tę parę. Na karcie towaru osobne sprawdzenie mówi, czy serduszko ma być zaznaczone. Strona schowka pokazuje zapisane produkty, żeby klient mógł do nich wrócić później.</p>
+
+<h2>10. Opinie</h2>
+<p>Opinię dodaje zalogowany użytkownik. Formularz wymaga identyfikatora produktu, tekstu i liczby gwiazdek. Tekst musi mieć od 10 do 500 znaków. Nowa opinia dostaje datę bieżącą i status oczekujący. Klient może później edytować i usunąć własną opinię. Na karcie towaru opinie są pokazywane razem ze średnią i liczbą ocen.</p>
+<p>Pracownik i administrator mają osobne listy opinii. Mogą usunąć wpis, który nie powinien zostać w sklepie. Administrator może też otworzyć opinię do edycji. Dzięki statusowi i osobnej moderacji ocena w sklepie nie jest całkowicie poza kontrolą sklepu.</p>
+
+<h2>11. Koszyk i składanie zamówienia</h2>
+<p>Koszyk pokazuje produkty zalogowanego klienta: zdjęcie, nazwę, cenę, ilość i wartość pozycji. Ilość można zmienić bez przeładowania całej strony; wartość i suma są wtedy liczone ponownie. Pozycję można usunąć. Suma zamówienia to iloczyn ceny katalogowej i ilości, zsumowany po wszystkich pozycjach.</p>
+<p>Dalsze kroki są rozdzielone na osobne strony, a wybory klienta wędrują w sesji:</p>
+<ol>
+<li><b>Dostawa.</b> Klient wybiera sposób dostawy oraz adres. Formularz jest wstępnie wypełniony imieniem, nazwiskiem i e-mailem z konta. Wybrany typ dostawy i identyfikator adresu trafiają do sesji. Jeżeli w bazie nie ma jeszcze takiego typu dostawy, jest on dopisywany jako aktywny. Jeżeli klient nie ma zapisanego adresu, adres z formularza jest tworzony i oznaczany jako ostatnio użyty.</li>
+<li><b>Płatność.</b> Klient wybiera aktywną metodę, na przykład BLIK albo przelew. Nazwa i identyfikator metody są zapisywane w sesji. Metoda nieaktywna nie jest przyjmowana.</li>
+<li><b>Podsumowanie.</b> Strona jeszcze raz czyta koszyk, adres i dostawę oraz pokazuje kwotę do zapłaty. Klient może tu nadal zmienić ilości. Suma jest ponownie zapisywana w sesji, żeby zamówienie nie powstało ze starej kwoty.</li>
+<li><b>Zapis zamówienia.</b> Skrypt sprawdza, czy jest klient, adres, dostawa, płatność i kwota większa od zera. Jeżeli któregoś wyboru brakuje w sesji, próbuje go odtworzyć: bierze adres domyślny albo najnowszy, odszukuje typ dostawy i metodę płatności po nazwie, a sumę liczy od nowa z koszyka. Dopiero gdy komplet danych jest spójny, otwierana jest transakcja bazy.</li>
+<li><b>Co dzieje się w transakcji.</b> Powstaje nagłówek zamówienia ze statusem „nowe”, z łączną ceną, datą, płatnością, dostawą i adresem. Pozycje koszyka są przepisywane do pozycji zamówienia razem z aktualną ceną. Koszyk klienta jest czyszczony. Jeżeli nie ma jeszcze faktury, nadawany jest numer w postaci F- oraz kolejny identyfikator i wiersz faktury jest zapisywany. Identyfikator zamówienia zostaje w sesji. Gdy którykolwiek krok się nie uda, cała transakcja jest cofana, więc nie zostaje zamówienie bez pozycji albo z nieopróżnionym koszykiem.</li>
+<li><b>Po zapisie.</b> Klient trafia na listę swoich zamówień. Osobna strona potwierdzenia informuje, że zamówienie zostało przyjęte.</li>
+</ol>
+
+<h2>12. Historia zamówień i faktura</h2>
+<p>W zakładce zamówień klient widzi tylko własne zamówienia, od najnowszego. Każde zamówienie ma datę, status oraz listę pozycji: nazwę, zdjęcie, cenę i ilość. Obok zamówienia jest przejście do faktury.</p>
+<p>Skrypt faktury przyjmuje identyfikator zamówienia i sprawdza jednocześnie, czy to zamówienie należy do zalogowanego klienta. Cudzego zamówienia nie da się pobrać przez podmianę numeru w adresie. Z bazy brane są data, status oraz pozycje. Suma jest liczona jako iloczyn ceny zapisanej w zamówieniu i ilości. Jeżeli numeru faktury jeszcze nie ma, jest tworzony tak samo jak przy składaniu zamówienia. Treść — numer, data, status, dane klienta, tabela pozycji i suma — jest składana w HTML i przekazywana do Dompdf. Przeglądarka dostaje plik PDF do pobrania.</p>
+
+<h2>13. Rekomendacje na stronie</h2>
+<p>Blok rekomendacji działa tylko dla zalogowanego klienta. Skrypt bierze do dziesięciu ostatnio oglądanych produktów, odczytuje ich kategorie i losuje do dwudziestu innych produktów z tych samych kategorii. Towary, które klient już oglądał, są pomijane. Kolejność jest losowa, więc lista nie jest zawsze identyczna. Gość dostaje pustą listę, bo bez historii wyświetleń nie ma na czym oprzeć doboru.</p>
+<p>Te rekomendacje są niezależne od czatu. Czat dobiera towar na podstawie słów w rozmowie. Blok na stronie dobiera towar na podstawie tego, w co klient wcześniej wszedł.</p>
+
+<h2>14. Czat doradcy sklepu</h2>
+<h3>14.1. Jak wygląda rozmowa</h3>
+<p>Okno czatu otwiera się z przycisku na stronie. Jest dostępne dla zalogowanego klienta. W oknie widać historię, pole wiadomości, przycisk nowej rozmowy oraz przejście do rekomendacji. Pierwsza wiadomość w danej wizycie zakłada sesję czatu i zapamiętuje jej identyfikator. Każda wiadomość klienta jest zapisywana od razu, jeszcze zanim powstanie odpowiedź. Po odpowiedzi przeglądarka dostaje tekst oraz karty produktów. Kliknięcie karty otwiera towar ze źródłem „chat”, więc to wejście później widać w statystykach.</p>
+<p>Nowa rozmowa czyści identyfikator sesji, więc kolejna wiadomość zakłada nową sesję, a stara historia zostaje w bazie.</p>
+
+<h3>14.2. Skąd doradca bierze produkty</h3>
+<p>Doradca nie przeszukuje całej bazy przy każdym zdaniu. Katalog jest wczytywany z pliku JSON, w którym są identyfikator, nazwa, cena, opis, zdjęcie i kategoria. Plik jest przeliczany po dodaniu, edycji albo usunięciu produktu w panelu, więc asystent nie proponuje towaru, którego już nie ma w sklepie.</p>
+
+<h3>14.3. Jak wybierane są towary, zanim odezwie się model</h3>
+<p>Model językowy nie dostaje całego magazynu. Najpierw skrypt sam zawęża listę.</p>
+<p>Tekst jest zamieniany na małe litery, a polskie znaki są sprowadzane do postaci bez ogonków, żeby „ksiazka” i „książka” dało się porównać. Kilka typowych literówek w słowie „książka” jest poprawianych przed szukaniem. Słownik przypisuje wyrazy do pięciu kategorii sklepu: książki (książka, powieść, autor, ebook), figurki (figurka, kolekcja, dekoracja fantasy), odzież (koszulka, bluza, hoodie), plakaty (plakat, poster, ściana) oraz biżuterię (naszyjnik, pierścień, bransoletka).</p>
+<p>Z ostatnich dziesięciu wiadomości klienta w tej rozmowie liczone są zainteresowania. Nowsza wiadomość ma większą wagę niż starsza. Z tego rachunku powstaje do trzech preferowanych kategorii.</p>
+<p>Dalej są trzy sytuacje:</p>
+<ul>
+<li>Jeżeli klient wprost podał nazwę kategorii, brane są produkty tylko z tej kategorii, zwykle dwa. Gdy kategorii nie ma w ofercie, odpowiedź mówi, że takich produktów nie ma, i model nie jest pytany.</li>
+<li>Jeżeli kategorii nie podano, słowa z wiadomości są szukane w nazwie i opisie. Słowa krótsze niż trzy znaki są pomijane. Produkt z większą liczbą trafień jest wyżej. Do odpowiedzi idą dwa najlepiej pasujące.</li>
+<li>Jeżeli dokładnego trafienia nie ma, a z historii wynikają kategorie, proponowane są towary z tych kategorii, przemieszane i skrócone do czterech, z informacją, że to propozycja na podstawie zainteresowań. Gdy historii zainteresowań też brakuje, pokazywane są dwa inne produkty z katalogu i krótka informacja, że dokładnego odpowiednika nie znaleziono.</li>
+</ul>
+
+<h3>14.4. Odpowiedź modelu</h3>
+<p>Do modelu trafia tylko ta krótka lista: nazwa, cena i opis. Polecenie mówi, że wolno mówić wyłącznie o podanych produktach, nie wolno wymyślać nowych pozycji, nie wolno mieszać kategorii bez potrzeby i trzeba odpowiedzieć krótko, naturalnie, po polsku. Jeżeli usługa nie zwróci tekstu, klient i tak dostaje zdanie wstępne przygotowane przez sklep oraz karty produktów. Odpowiedź i lista produktów są zapisywane jako wiadomość doradcy, więc po odświeżeniu historii karty wracają razem z tekstem.</p>
+
+<h2>15. Panel pracownika</h2>
+<p>Wejście jest możliwe tylko przy roli pracownika. Panel pokazuje listę produktów. Przed usunięciem skrypt sprawdza, czy rekord istnieje, a po usunięciu katalog JSON dla czatu jest budowany od nowa.</p>
+<p>Dodanie produktu wymaga nazwy, ceny, opisu, kategorii i opcjonalnego zdjęcia. Zdjęcie jest zapisywane w katalogu FOTO, a w produkcie ląduje ścieżka do pliku. Edycja otwiera istniejący rekord i pozwala zmienić te same pola. Po zapisie pracownik wraca do listy, a plik katalogu czatu jest aktualizowany.</p>
+<p>Osobna lista opinii pozwala usunąć wpis. Moduł statystyk liczy dla każdego produktu liczbę wyświetleń, liczbę sprzedaży i współczynnik konwersji: udział sprzedaży w wyświetleniach, w procentach. Drugie zestawienie grupuje wyświetlenia według źródła i porównuje je z zamówieniami tego samego klienta złożonymi po tym wyświetleniu. Na tablicy są również: zamówienia z dzisiaj, zamówienia w bieżącym miesiącu, łączny przychód z pozycji zamówień, średnia wartość zamówienia, liczba zamówień anulowanych, liczba zamówień oczekujących oraz pięć najczęściej sprzedanych produktów według sumy ilości.</p>
+
+<h2>16. Panel administratora</h2>
+<p>Wejście jest możliwe tylko przy roli administratora. Na głównym ekranie widać złożone zamówienia razem z danymi klienta i pozycjami.</p>
+<p>W zarządzaniu użytkownikami administrator zakłada konto i od razu nadaje rolę: klient, pracownik albo administrator. Hasło nowego konta jest zapisywane jako skrót. Przed zapisem sprawdzany jest e-mail, żeby nie powstał duplikat. Istniejące konto można edytować: imię, nazwisko, e-mail i rola. Własnej roli administrator nie zmienia. Cudze konto można usunąć; własnego — nie.</p>
+<p>Administrator edytuje i usuwa produkty na tych samych zasadach co pracownik, moderuje opinie i otwiera analizę sprzedaży. Osobna statystyka czatu, liczona na żądanie i pokazywana na stronie panelu, obejmuje: liczbę rozmów rozpoczętych dzisiaj, łączną liczbę wiadomości, liczbę odpowiedzi doradcy, przy których zapisano produkty, liczbę wejść na produkty ze źródłem „chat” oraz dziesięć najczęściej powtarzanych pytań klientów.</p>
+
+<h2>17. Jak przebiega typowa ścieżka klienta</h2>
+<p>Niezalogowany użytkownik wchodzi na stronę główną, ogląda suwak, wybiera kategorię albo wpisuje frazę w wyszukiwarkę i otwiera kartę towaru. Aby dodać produkt do koszyka albo do schowka, zakłada konto albo loguje się. W koszyku ustala ilości, przechodzi do dostawy i płatności, sprawdza podsumowanie i zatwierdza zamówienie. W jednej transakcji powstaje zamówienie, pozycje są przepisane z ceną z chwili zakupu, koszyk zostaje opróżniony i nadawany jest numer faktury. Zamówienie pojawia się na liście, a z tej listy klient pobiera PDF.</p>
+<p>W dowolnym momencie po zalogowaniu może zapisać towar w schowku, wystawić opinię, odsłuchać stronę czytnikiem albo zapytać czat. Czat najpierw sam wybiera kilka produktów z katalogu, a potem układa z nich zdanie. Wejście w produkt z czatu jest oznaczane źródłem „chat”. Kolejne odwiedziny zasilają rekomendacje na stronie oraz statystyki konwersji w panelu pracownika.</p>
+
+<h2>18. Podsumowanie</h2>
+<p>Część praktyczna jest zrealizowana jako działający sklep, a nie jako sam projekt ekranów. Działają katalog, wyszukiwanie, konto, koszyk, zamówienie w transakcji, faktura, opinie, schowek, trzy role, statystyki sprzedaży, czytnik treści oraz czat, który najpierw wybiera towary z katalogu, a potem układa z nich odpowiedź. Dane zamówień, użytkowników, wyświetleń i rozmów są w SQL Server i mogą być pokazane w panelach pracownika oraz administratora.</p>
+<p>Dokument opisuje stan wykonany w aplikacji. Można go wstawić do pracy dyplomowej jako rozdział o implementacji i uzupełnić danymi formalnymi: imieniem i nazwiskiem, nazwą uczelni, kierunkiem, promotorem oraz numerem albumu.</p>
+
+</body>
+</html>

@@ -1,0 +1,392 @@
+<?php
+session_start();
+?>
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../Css_files/styleindex.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Julee&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Dragon World</title>
+</head>
+<body>
+<script src="../../runes-bg.js"></script>
+  <header>
+    <a href="IndexForClients" class="logo-link">
+      <div class="logo header-item">
+        <img src="../FOTO/12.png" alt="Логотип">
+        <span><span class="red">Dragon</span> <span class="green">World</span></span>
+      </div>
+    </a>
+    
+    <div class="dropdown header-item">
+      <button class="transparent-button">Kategorie</button>
+      <div class="dropdown-content">
+        <a href="../Kategoria/kategoria.html?id=1">Figurki smoków</a>
+        <a href="../Kategoria/kategoria.html?id=2">Biżuteria</a>
+        <a href="../Kategoria/kategoria.html?id=3">Plakaty</a>
+        <a href="../Kategoria/kategoria.html?id=4">Odzież</a>
+        <a href="../Kategoria/kategoria.html?id=5">Książki</a>
+      </div>
+    </div>
+    
+    <div class="search-container header-item">
+      <input type="text" id="searchInput" placeholder="Wyszukaj w sklepie">
+      <button id="searchButton" class="search-btn"><i class="fas fa-search"></i></button>
+    </div>
+    
+    <?php if (isset($_SESSION['user'])): ?>
+  <div class="user-info header-item">
+    <div class="profile-drop">
+    Witaj, <?php echo htmlspecialchars($_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name']); ?>
+    <?php
+      require_once dirname(__DIR__, 2) . '/secure/profile_menu.php';
+      dw_profile_menu('../../Konto/Moje dane/Php_files', 'logout.php');
+    ?>
+    </div>
+    <a href="../Php_files/logout.php">Wyloguj się</a>
+  </div>
+<?php else: ?>
+  <a href="../Html_files/Login.html" class="konto header-item">Konto</a>
+<?php endif; ?>
+
+    
+    <div class="serdce header-item"><i class="fas fa-heart" style="color: #8D242E;"></i></div>
+    <div class="koszyk header-item">Koszyk</div>
+  </header>
+
+  <main>
+    <div class="hero-image">
+      <div class="hero-text ppp">
+        <p>Dragon World to nie tylko sklep, to miejsce, w którym </p>
+        <p>możesz doświadczyć i poznać tajemniczą rasę żywych istot.</p>
+        <p>Kup figurkę smoka, ubrania ze smoczymi nadrukami lub prostą, ale </p>
+        <p> zabawną książkę o smokach, znajdziesz tutaj wszystko.</p>
+        <p>Smoki na zawsze pozostaną w naszych sercach.</p>
+      </div>
+    </div>
+
+
+<div class="background_dla_slajdera">
+ <div class="slider">
+      <div class="slides">
+          <!-- Оригинальные слайды -->
+          <div class="slide"><img src="../FOTO/Towar.png" alt="Слайд 1"></div>
+          <div class="slide"><img src="../FOTO/Towar2.png" alt="Слайд 2"></div>
+          <div class="slide"><img src="../FOTO/Towar.png" alt="Слайд 3"></div>
+          <div class="slide"><img src="../FOTO/Towar2.png" alt="Слайд 4"></div>
+          <div class="slide"><img src="../FOTO/Towar.png" alt="Слайд 5"></div>
+  
+          <!-- Дубликаты для бесшовного перехода -->
+          <div class="slide"><img src="../FOTO/Towar.png" alt="Слайд 1"></div>
+          <div class="slide"><img src="../FOTO/Towar2.png" alt="Слайд 2"></div>
+          <div class="slide"><img src="../FOTO/Towar.png" alt="Слайд 3"></div>
+          <div class="slide"><img src="../FOTO/Towar2.png" alt="Слайд 4"></div>
+          <div class="slide"><img src="../FOTO/Towar.png" alt="Слайд 5"></div>
+      </div>
+  </div>
+</div>
+
+<div class="product-container-new"></div>
+
+
+</div>
+
+<div class="container">
+  <div class="form-box">
+    <h2 class="text">Aby się z nami skontaktować, zostaw prośbę w poniższym polu, wpisując swoje imię, nazwisko i numer telefonu. Dziękujemy za zainteresowanie!</h2>
+    <input class="inputt" type="text" id="firstName" placeholder="Imię" title="Tylko litery">
+    <div id="firstNameError" class="errormessage"></div> 
+
+    <input class="inputt" type="text" id="lastName" placeholder="Nazwisko" title="Tylko litery">
+    <div id="lastNameError" class="errormessage"></div> 
+
+    <input class="inputt" type="tel" id="phone" placeholder="Numer telefonu(z kodem np. +48, +38)">
+    <div id="phoneError" class="errormessage"></div>
+
+    <button class="buttoon" id="saveButton">Zapisz</button>
+
+
+  </div>
+  <img src="../Url/Dragon.png" alt="Smok" class="dragon-img">
+</div>
+
+<div class="product-container"></div>
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-column">
+      <h3>Jak mogę skontaktować?</h3>
+      <p>Viber: +48725975501</a></p>
+      <p>Telegram: +48725975501</p>
+      <p>Instagram: dragon_woorld</p>
+      <p>Email: reper774@gmail.com</p>
+    </div>
+
+    <div class="footer-column">
+      <h3>Kategorie</h3>
+      <p>Kategorie</p>
+      <p>Kategorie</p>
+      <p>Kategorie</p>
+      <p>Kategorie</p>
+      <p>Kategorie</p>
+    </div>
+
+    <div class="footer-column">
+      <h3>Moje konto</h3>
+      <p>Moje dane</p>
+      <p>Zamówienia</p>
+      <p>Schowek</p>
+      <p>Opinie</p>
+      <p>Faktura</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Dragon World 2025</p>
+  </div>
+</footer>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const saveButton = document.getElementById('saveButton');
+      if (saveButton) {
+          saveButton.addEventListener('click', function(event) {
+              const firstName = document.getElementById('firstName').value;
+              const lastName = document.getElementById('lastName').value;
+              const phone = document.getElementById('phone').value;
+  
+              const regex = /^[A-Za-zĄąĆćĘęŁłŃńÓóŚśŻżŹź]+$/;
+              // Регулярное выражение для проверки номера телефона
+              const phoneRegex = /^\+(38\d{10}|48\d{9})$/;  // Если номер начинается с +38, то 10 цифр, если с +48, то 9 цифр
+  
+              let isValid = true;
+  
+              // Валидация имени
+              if (!firstName) {
+                  document.getElementById('firstNameError').textContent = "Proszę wypełnić pole Imię.";
+                  document.getElementById('firstNameError').style.visibility = 'visible';
+                  isValid = false;
+              } else if (!regex.test(firstName)) {
+                  document.getElementById('firstNameError').textContent = "Imię może zawierać tylko litery.";
+                  document.getElementById('firstNameError').style.visibility = 'visible';
+                  isValid = false;
+              } else {
+                  document.getElementById('firstNameError').style.visibility = 'hidden';
+              }
+  
+              // Валидация фамилии
+              if (!lastName) {
+                  document.getElementById('lastNameError').textContent = "Proszę wypełnić pole Nazwisko.";
+                  document.getElementById('lastNameError').style.visibility = 'visible';
+                  isValid = false;
+              } else if (!regex.test(lastName)) {
+                  document.getElementById('lastNameError').textContent = "Nazwisko może zawierać tylko litery.";
+                  document.getElementById('lastNameError').style.visibility = 'visible';
+                  isValid = false;
+              } else {
+                  document.getElementById('lastNameError').style.visibility = 'hidden';
+              }
+  
+              // Валидация номера телефона
+              if (!phone) {
+                  document.getElementById('phoneError').textContent = "Proszę wypełnić pole Numer telefonu.";
+                  document.getElementById('phoneError').style.visibility = 'visible';
+                  isValid = false;
+              } else if (!phoneRegex.test(phone)) {
+                  document.getElementById('phoneError').textContent = "Numer telefonu musi zaczynać się od '+38' i mieć 10 cyfr, lub zaczynać się od '+48' i mieć 9 cyfr.";
+                  document.getElementById('phoneError').style.visibility = 'visible';
+                  isValid = false;
+              } else {
+                  document.getElementById('phoneError').style.visibility = 'hidden';
+              }
+  
+              if (!isValid) {
+                  event.preventDefault(); // Останавливаем отправку формы, если есть ошибки
+              } else {
+                  // Отправляем данные на сервер
+                  fetch('save_form.php', {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/x-www-form-urlencoded',
+                      },
+                      body: new URLSearchParams({
+                          firstName: firstName,
+                          lastName: lastName,
+                          phone: phone,
+                      }),
+                  })
+                  .then(response => response.text())
+                  .then(data => {
+                  console.log("Odpowiedź serwera:", data); // Просто логируем, но не показываем alert
+                  })
+                  .catch(error => console.error("Ошибка сохранения данных:", error));
+              }
+          });
+      }
+  });
+  
+  
+  
+  
+  
+  
+  
+  
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const firstContainer = document.querySelector(".product-container"); // Первая полоска товаров
+    const secondContainer = document.querySelector(".product-container-new"); // Вторая полоска товаров
+
+    if (!firstContainer || !secondContainer) {
+        console.error("Один из контейнеров не найден!");
+        return;
+    }
+
+    function loadProducts(apiUrl, container, showNewLabel) {
+      fetch(apiUrl)
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error("Ошибка загрузки данных");
+              }
+              return response.json();
+          })
+          .then(products => {
+              console.log("Загруженные товары из", apiUrl, products); 
+              container.innerHTML = ""; 
+  
+              let row;
+              products.forEach((product, index) => {
+                  if (index % 3 === 0) {
+                      row = document.createElement("div");
+                      row.classList.add("card-container");
+                      container.appendChild(row);
+                  }
+  
+                  const card = document.createElement("div");
+                  card.classList.add("card");
+  
+                  card.innerHTML = `
+                     <a href="../StronaTowara/StronaTowara.php?id=${product.id}" class="card-link">
+                          <img src="${product.image}" alt="${product.name}">
+                          <div class="card-content">
+                              ${showNewLabel ? '<div class="new-label">NEW</div>' : ' '}
+                              <p class="product-title">${product.name}</p>
+                              <p class="product-price">Cena: ${product.price} zł</p>
+                              <p class="product-description">${product.description}</p>
+                          </div>
+                      </a>
+                  `;
+  
+                  row.appendChild(card);
+              });
+          })
+          .catch(error => console.error("Ошибка загрузки товаров:", error));
+  }
+  
+  
+    loadProducts("get_products.php", firstContainer, false);
+
+    loadProducts("get_products_new.php", secondContainer, true);
+});
+
+
+  
+  
+  
+document.addEventListener("DOMContentLoaded", function () {
+  const slides = document.querySelector(".slides");
+  const slide = document.querySelector(".slide");
+
+  // Получаем точную ширину слайда с учетом отступов
+  const slideStyle = getComputedStyle(slide);
+  const slideWidth = slide.offsetWidth + parseInt(slideStyle.marginLeft) + parseInt(slideStyle.marginRight);
+  let index = 0;
+
+  // Дублируем слайды для бесшовного эффекта
+  const allSlides = document.querySelectorAll(".slide");
+  const totalSlides = allSlides.length; // Общее количество слайдов в DOM
+
+  // Дублируем слайды в контейнер
+  for (let i = 0; i < allSlides.length; i++) {
+    const clone = allSlides[i].cloneNode(true);
+    slides.appendChild(clone); // Добавляем дубликаты слайдов в конец
+  }
+
+  function nextSlide() {
+    index++;
+    slides.style.transition = "transform 0.5s ease-in-out";
+    slides.style.transform = `translateX(${-index * slideWidth}px)`;
+
+    if (index >= totalSlides) {
+      setTimeout(() => {
+        slides.style.transition = "none";
+        index = 0;
+        slides.style.transform = `translateX(0px)`; // Сбрасываем позицию в начало
+      }, 500); // Время должно совпадать с продолжительностью анимации
+    }
+  }
+
+  // Автоматическое переключение слайдов
+  setInterval(nextSlide, 2500); // Переключаем слайды каждые 2.5 секунды
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const searchButton = document.getElementById("searchButton");
+  const searchInput = document.getElementById("searchInput");
+  const productContainer = document.querySelector(".product-container"); // Контейнер для отображения товаров
+
+  searchButton.addEventListener("click", function () {
+      const query = searchInput.value.trim(); // Получаем текст запроса
+
+      if (query.length === 0) {
+          alert("Wpisz coś do wyszukania!");
+          return;
+      }
+
+      fetch("search_products.php?q=" + encodeURIComponent(query))
+          .then(response => response.json())
+          .then(products => {
+              productContainer.innerHTML = ""; // Очищаем старые результаты поиска
+
+              if (products.length === 0) {
+                  productContainer.innerHTML = "<p>Brak wyników wyszukiwania.</p>";
+                  return;
+              }
+
+              let row;
+              products.forEach((product, index) => {
+                  if (index % 3 === 0) {
+                      row = document.createElement("div");
+                      row.classList.add("card-container");
+                      productContainer.appendChild(row);
+                  }
+
+                  const card = document.createElement("div");
+                  card.classList.add("card");
+
+                  card.innerHTML = `
+                      <img src="${product.image}" alt="${product.name}">
+                      <div class="card-content">
+                          <p class="product-title">${product.name}</p>
+                          <p class="product-price">Cena: ${product.price} zł</p>
+                          <p class="product-description">${product.description}</p>
+                          <p class="more-info">Więcej...</p>
+                      </div>
+                  `;
+
+                  row.appendChild(card);  
+              });
+          })
+          .catch(error => console.error("Błąd wyszukiwania:", error));
+  });
+});
+  </script>
+
+<script src="../../header-scroll.js"></script>
+</body>
+</html>

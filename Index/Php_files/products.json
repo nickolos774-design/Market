@@ -1,0 +1,191 @@
+[
+    {
+        "id": "2",
+        "name": "Figurka smoka zielony",
+        "price": "121.00",
+        "description": "fdgfg",
+        "image": "..\/FOTO\/Figurki\/Figurka2.PNG",
+        "category_id": "1",
+        "category_name": "Figurki smoków"
+    },
+    {
+        "id": "4",
+        "name": "Figurka smoka czerwony",
+        "price": "12.00",
+        "description": "gggg",
+        "image": "..\/FOTO\/Figurki\/Figurka3.PNG",
+        "category_id": "1",
+        "category_name": "Figurki smoków"
+    },
+    {
+        "id": "5",
+        "name": "Figurka",
+        "price": "1212.00",
+        "description": "ffff",
+        "image": "..\/FOTO\/Figurki\/Figurka4.PNG",
+        "category_id": "1",
+        "category_name": "Figurki smoków"
+    },
+    {
+        "id": "6",
+        "name": "Książka \"Gra O Tron\"",
+        "price": "67.00",
+        "description": "hhh",
+        "image": "..\/FOTO\/4 3.png",
+        "category_id": "5",
+        "category_name": "Książki"
+    },
+    {
+        "id": "2010",
+        "name": "Leśny wisiorek z kryształem",
+        "price": "100.00",
+        "description": "Leśny wisiorek z kryształem to wyjątkowa biżuteria inspirowana naturą, symbolizująca harmonię, spokój oraz bliskość z lasem. Każdy egzemplarz wyróżnia się naturalnym charakterem i często wykonywany jest ręcznie, dzięki czemu jest niepowtarzalny.",
+        "image": "..\/FOTO\/5.png",
+        "category_id": "2",
+        "category_name": "Biżuteria"
+    },
+    {
+        "id": "2011",
+        "name": "Kolczyki wiszące „Krwawe Kryształy”",
+        "price": "120.00",
+        "description": "Eleganckie, długie kolczyki wiszące w stylu gotyckim, inspirowane mroczną estetyką i tajemniczym klimatem fantasy. Biżuteria wykonana jest z ciemnego metalu o artystycznie nieregularnej formie, która przypomina oplatające gałęzie lub zastygłą lawę. Centralnym elementem każdego kolczyka jest intensywnie czerwony kryształ o głębokim połysku, pięknie odbijający światło i przyciągający uwagę.",
+        "image": "..\/FOTO\/1.png",
+        "category_id": "2",
+        "category_name": "Biżuteria"
+    },
+    {
+        "id": "2012",
+        "name": "Eleganckie kolczyk z fioletowym kamieniem",
+        "price": "200.00",
+        "description": "Stylowe kolczyki wiszące o eleganckim i klasycznym charakterze. Biżuteria wykonana w kolorze srebra została ozdobiona owalnymi kamieniami w głębokim, fioletowym odcieniu, które przyciągają uwagę subtelnym blaskiem i szlachetnym wyglądem. Dekoracyjna oprawa z delikatnym reliefem nadaje kolczykom wyjątkowy styl inspirowany biżuterią vintage.",
+        "image": "..\/FOTO\/3.png",
+        "category_id": "2",
+        "category_name": "Biżuteria"
+    },
+    {
+        "id": "2013",
+        "name": "Złoty wisiorek „Smok Mocy”",
+        "price": "1400.00",
+        "description": "Efektowny wisiorek w kształcie smoka wykonany w złotym kolorze, inspirowany symboliką siły, odwagi i ochrony. Precyzyjnie wykonane detale podkreślają skrzydła, łuski oraz dynamiczną sylwetkę smoka, nadając biżuterii wyrazisty i elegancki charakter.",
+        "image": "..\/FOTO\/4.png",
+        "category_id": "2",
+        "category_name": "Biżuteria"
+    },
+    {
+        "id": "2014",
+        "name": "Fantazyjny wisior „Szafirowy Płomień”",
+        "price": "300.00",
+        "description": "Elegancki, ręcznie stylizowany wisior w artystycznym klimacie fantasy. Ozdoba wykonana z misternie plecionych srebrzystych elementów, które otulają intensywnie niebieski kamień przypominający szafir",
+        "image": "..\/FOTO\/photo_2026-05-12_03-40-40.jpg",
+        "category_id": "2",
+        "category_name": "Biżuteria"
+    },
+    {
+        "id": "2015",
+        "name": "Gotycka sukienka „Leśna Wiedźma”",
+        "price": "500.00",
+        "description": "Stylowa sukienka w klimacie gothic fantasy inspirowana estetyką dark fairycore oraz elfickim stylem. Model z odkrytymi ramionami i długimi, rozszerzanymi rękawami w kolorze głębokiej zieleni pięknie kontrastuje z czarnym, asymetrycznym dołem.",
+        "image": "..\/FOTO\/image-3.png",
+        "category_id": "4",
+        "category_name": "Odzież"
+    },
+    {
+        "id": "2016",
+        "name": "Bluza fantasy „Smok Cienia”",
+        "price": "400.00",
+        "description": "Wyjątkowa bluza z kapturem inspirowana światem fantasy i nordycką symboliką. Model ozdobiony efektownym nadrukiem potężnego smoka w odcieniach czerni i szarości, który nadaje całości mroczny, tajemniczy charakter.",
+        "image": "..\/FOTO\/image-4.png",
+        "category_id": "4",
+        "category_name": "Odzież"
+    },
+    {
+        "id": "2017",
+        "name": "Sukienka gotycka z kapturem „Białe Gałęzie”",
+        "price": "509.00",
+        "description": "Długa czarna sukienka w stylu gotyckim z asymetrycznym krojem i dużym kapturem. Model zapinany na zamek z przodu, wykonany z miękkiego i wygodnego materiału. Charakterystyczny biały wzór przypominający gałęzie drzew nadaje sukience tajemniczy i fantasy wygląd.",
+        "image": "..\/FOTO\/image.png",
+        "category_id": "4",
+        "category_name": "Odzież"
+    },
+    {
+        "id": "2018",
+        "name": "Koszulka fantasy „Leśny Smok”",
+        "price": "200.00",
+        "description": "Czarna koszulka z efektownym nadrukiem majestatycznego smoka w mrocznym leśnym klimacie. Grafika przedstawia detalicznie wykonane skrzydła, łuski oraz korzenie drzew, tworząc wyjątkowy styl fantasy. Wykonana z miękkiego i wygodnego materiału, idealna do codziennego noszenia dla fanów smoków, gier RPG i gotyckiej estetyki.",
+        "image": "..\/FOTO\/image-1.png",
+        "category_id": "4",
+        "category_name": "Odzież"
+    },
+    {
+        "id": "2019",
+        "name": "Koszulka fantasy „Ognisty Smok”",
+        "price": "100.00",
+        "description": "Stylowa czarna koszulka z dynamicznym nadrukiem ziejącego ogniem smoka otoczonego płomieniami. Intensywne czerwono-pomarańczowe kolory nadają grafice mocny i agresywny charakter.",
+        "image": "..\/FOTO\/image-2.png",
+        "category_id": "4",
+        "category_name": "Odzież"
+    },
+    {
+        "id": "2020",
+        "name": "Kot Fantasy — Figurka Kolekcjonerska",
+        "price": "344.00",
+        "description": "Wyjątkowa figurka smoczego kota w stylu fantasy, wykonana z niezwykłą dbałością o detale. Mistyczne skrzydła, świecące oczy oraz ornamentalne zdobienia nadają postaci magiczny charakter. Idealna dla kolekcjonerów, fanów smoków i fantastycznych stworzeń. Doskonała dekoracja na półkę,",
+        "image": "..\/FOTO\/13.png",
+        "category_id": "1",
+        "category_name": "Figurki smoków"
+    },
+    {
+        "id": "2021",
+        "name": "Garguleс — Figurka Dekoracyjna 3D",
+        "price": "123.00",
+        "description": "Imponująca figurka gargulca w dynamicznej pozie, wykonana w technologii druku 3D. Potężne skrzydła, muskularna sylwetka i mroczny wygląd sprawiają, że model doskonale pasuje do kolekcji fantasy lub gotyckiego wystroju wnętrza. Idealna dla fanów mitologicznych stworzeń i unikalnych dekoracji.",
+        "image": "..\/FOTO\/15.png",
+        "category_id": "1",
+        "category_name": "Figurki smoków"
+    },
+    {
+        "id": "2022",
+        "name": "Kocie Postacie RPG — Zestaw Figurek Fantasy",
+        "price": "333.00",
+        "description": "Zestaw dwóch figurek inspirowanych światem fantasy i gier RPG. Jedna postać przedstawia muzyka z lutnią, druga tajemniczego maga z kosturem.",
+        "image": "..\/FOTO\/12123.png",
+        "category_id": "1",
+        "category_name": "Figurki smoków"
+    },
+    {
+        "id": "2023",
+        "name": "Plakat \"Zaczarowana Dolina\"",
+        "price": "123.00",
+        "description": "Na plakacie widać magiczną krainę pełną zieleni, kamienną ścieżkę prowadzącą przez ogród, starą wieżę porośniętą bluszczem oraz wodospady i góry w tle. Atmosfera jest spokojna, bajkowa i pełna tajemnic.",
+        "image": "..\/FOTO\/asdasd-1.png",
+        "category_id": "3",
+        "category_name": "Plakaty"
+    },
+    {
+        "id": "2024",
+        "name": "Plakat \"Tajemniczy Las\"",
+        "price": "222.00",
+        "description": "Na plakacie znajduje się mglisty las z wysokimi drzewami i małym strumieniem przepływającym przez zielony teren. Scena wygląda spokojnie, ale jednocześnie tajemniczo i lekko mrocznie, jak miejsce z legend.",
+        "image": "..\/FOTO\/afasf.png",
+        "category_id": "3",
+        "category_name": "Plakaty"
+    },
+    {
+        "id": "2025",
+        "name": "Plakat \"Smok Ognia\"",
+        "price": "1212.00",
+        "description": "Plakat przedstawia potężnego smoka ziejącego ogniem na wojownika stojącego pośród płonących ruin. Obraz jest dramatyczny, pełen napięcia i niebezpieczeństwa, symbolizuje walkę dobra ze złem.",
+        "image": "..\/FOTO\/asdasd.png",
+        "category_id": "3",
+        "category_name": "Plakaty"
+    },
+    {
+        "id": "2026",
+        "name": "Historia o starym smoku",
+        "price": "1212.00",
+        "description": "dggdfhgdfghdf",
+        "image": "..\/FOTO\/image 2.png",
+        "category_id": "5",
+        "category_name": "Książki"
+    }
+]

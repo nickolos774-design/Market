@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="../Css_files/stylereg.css?v=4" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Julee&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    .product-container {
+      margin-top: 200px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+    }
+  </style>
+</head>
+<script src="../../runes-bg.js"></script>
+
+<header>
+  <a href="../Index/Index.php" class="logo-link">
+    <div class="logo header-item">
+      <img src="../../Index/Zdecia/12.png" alt="Логотип">
+      <span><span class="red">Dragon</span> <span class="green">World</span></span>
+    </div>
+  </a>
+  
+  <div class="dropdown header-item">
+    <button class="transparent-button">Kategorie</button>
+    <div class="dropdown-content">
+      <a href="../Kategoria/kategoria.html?id=1">Figurki smoków</a>
+      <a href="../Kategoria/kategoria.html?id=2">Biżuteria</a>
+      <a href="../Kategoria/kategoria.html?id=3">Plakaty</a>
+      <a href="../Kategoria/kategoria.html?id=4">Odzież</a>
+      <a href="../Kategoria/kategoria.html?id=5">książki</a>
+    </div>
+  </div>
+  
+  <div class="search-container header-item">
+    <input type="text" id="searchInput" placeholder="Wyszukaj w sklepie">
+    <button id="searchButton" class="search-btn"><i class="fas fa-search"></i></button>
+    <div id="search-dropdown" class="dropdown-content"></div>
+  </div>
+  
+  <a href="../Html_files/regestracja.html" class="konto header-item">Konto</a>
+  <a href="../../Konto/Schowek/Php_files/Schowek.php" class="serdce header-item"><i class="fas fa-heart" style="color: #8D242E;"></i></a>
+  <a href="../../Konto/Koszyk/Php_files/Koszyk.php" class="koszyk header-item">Koszyk</a>
+</header>
+
+<div class="register-page">
+  <div class="dragon-image">
+    <img src="../../FOTO/green-dragon.png" alt="Zielony Smok">
+  </div>
+  
+  <div class="register-form">
+    <h2>Zaloguj się</h2>
+    
+    <input type="email" id="email" placeholder="E-mail">
+    <div class="password-fields">
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Hasło">
+      </div>
+    </div>
+    
+    <button class="login-button">Zaloguj się</button>
+    
+    <div class="login-link">
+      Nie masz konta? <a href="regestracja.html">Zarejestruj się</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const loginButton = document.querySelector('.login-button');
+
+  loginButton.addEventListener('click', function (e) {
+      e.preventDefault();
+  
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+  
+      if (!email || !password) {
+          alert('Wprowadź e-mail i hasło.');
+          return;
+      }
+  
+      fetch('../Php_files/login.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+      })
+      .then(res => res.json())
+      .then(data => {
+          if (data.success) {
+              switch (data.role) {
+                  case 'admin':
+                      window.location.href = "../../Admin/Admin_panel.php"; 
+                      break;
+                  case 'employee':
+                      window.location.href = "../../Pracownik/pracownikpanel.php"; 
+                      break;
+                  case 'client':
+                  default:
+                      window.location.href = "../../Index/Php_files/Index.php"; 
+                      break;
+              }
+          } else {
+              alert('Błąd: ' + data.message);
+          }
+      })
+      .catch(err => {
+          console.error('Błąd:', err);
+      });
+  });
+  
+</script>
+
+<script src="../../header-scroll.js"></script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="../Css_files/stylereg.css?v=4" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Julee&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Пример стилей для контейнера продуктов */
+    .product-container {
+      margin-top: 200px; /* Увеличиваем отступ сверху */
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+    }
+  </style>
+</head>
+<script src="../../runes-bg.js"></script>
+
+<header>
+  <a href="../../Index/Php_files/Index.php" class="logo-link">
+    <div class="logo header-item">
+      <img src="../../Index/Zdecia/12.png" alt="Логотип">
+      <span><span class="red">Dragon</span> <span class="green">World</span></span>
+    </div>
+  </a>
+  
+  <div class="dropdown header-item">
+    <button class="transparent-button">Kategorie</button>
+     <div class="dropdown-content">
+        <a href="../../Kategoria/Php_files/kategoria.php?id=1">Figurki smoków</a>
+        <a href="../../Kategoria/Php_files/kategoria.php?id=2">Biżuteria</a>
+        <a href="../../Kategoria/Php_files/kategoria.php?id=3">Plakaty</a>
+        <a href="../../Kategoria/Php_files/kategoria.php?id=4">Odzież</a>
+        <a href="../../Kategoria/Php_files/kategoria.php?id=5">Książki</a>
+      </div>
+    
+  </div>
+  <div class="search-container header-item">
+    <input type="text" id="searchInput" placeholder="Wyszukaj w sklepie">
+      <button id="searchButton" class="search-btn"><i class="fas fa-search"></i></button>
+      <div id="search-dropdown" class="dropdown-content"></div>
+  </div>
+  
+  <a href="../Html_files/regestracja.html" class="konto header-item">Konto</a>
+
+  <a href="../../Konto/Schowek/Php_files/Schowek.php"
+ class="serdce header-item"><i class="fas fa-heart" style="color: #8D242E;"></i>
+</a>
+
+<a href="../../Konto/Koszyk/Php_files/Koszyk.php"
+  <div class="koszyk header-item">Koszyk</div>
+</a>
+</header>
+
+<div class="register-page">
+    <div class="dragon-image">
+      <img src="../../FOTO/green-dragon.png" alt="Zielony Smok">
+    </div>
+    <div class="register-form">
+      <h2>Zarejestruj się</h2>
+      <input type="text" placeholder="Imię">
+      <input type="text" placeholder="Nazwisko">
+      <input type="email" placeholder="E-mail">
+      <div class="password-fields">
+        <div class="input-group">
+          <input type="password" placeholder="Hasło">
+        </div>
+        <div class="input-group">
+          <input type="password" placeholder="Powtórz hasło">
+        </div>
+      </div>
+      
+      <button class="register-button">Zarejestruj się</button>
+
+      <div class="login-link">
+        Masz już konto? <a href="Login.html">Zaloguj się</a>
+      </div>
+    </div>
+
+    
+  </div>
+
+  <script>
+    const inputs = document.querySelectorAll('.register-form input');
+    const registerButton = document.querySelector('.register-button');
+  
+    const firstName = inputs[0];
+    const lastName = inputs[1];
+    const email = inputs[2];
+    const password = inputs[3];
+    const confirmPassword = inputs[4];
+  
+    function setError(input, message) {
+      let error = input.nextElementSibling;
+      if (!error || !error.classList.contains('error-message')) {
+        error = document.createElement('div');
+        error.classList.add('error-message');
+        input.parentNode.insertBefore(error, input.nextSibling);
+      }
+      error.innerHTML = message; // ВАЖНО: innerHTML, чтобы поддерживать ссылки
+      input.style.borderColor = 'red';
+    }
+  
+    function clearError(input) {
+      let error = input.nextElementSibling;
+      if (error && error.classList.contains('error-message')) {
+        error.remove();
+      }
+      input.style.borderColor = '';
+    }
+  
+    const nameRegex = /^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\s]*$/;
+    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+    function validateInput(input, regex, errorMessage) {
+      if (input.value.trim() === '') {
+        clearError(input);
+      } else if (!regex.test(input.value.trim())) {
+        setError(input, errorMessage);
+      } else {
+        clearError(input);
+      }
+    }
+  
+    firstName.addEventListener('input', () => {
+      validateInput(firstName, nameRegex, 'Imię może zawierać tylko litery.');
+    });
+  
+    lastName.addEventListener('input', () => {
+      validateInput(lastName, nameRegex, 'Nazwisko może zawierać tylko litery.');
+    });
+  
+    password.addEventListener('input', () => {
+      validateInput(password, passwordRegex, 'Hasło musi mieć min. 8 znaków, cyfrę i znak specjalny.');
+    });
+  
+    confirmPassword.addEventListener('input', () => {
+      if (confirmPassword.value.trim() === '') {
+        clearError(confirmPassword);
+      } else if (confirmPassword.value.trim() !== password.value.trim()) {
+        setError(confirmPassword, 'Hasła nie są takie same.');
+      } else {
+        clearError(confirmPassword);
+      }
+    });
+  
+    let debounceTimer;
+  
+    email.addEventListener('input', () => {
+      validateInput(email, emailRegex, 'Wprowadź poprawny adres email.');
+      
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        if (emailRegex.test(email.value.trim())) {
+          checkEmailAvailability(email.value.trim());
+        }
+      }, 500);
+    });
+  
+   function checkEmailAvailability(emailValue) {
+  fetch('../Php_files/check_email.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: emailValue })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (!data.success) {
+      setError(email, data.message + ' <a href="Login.html" style="color: blue; text-decoration: underline;">Proszę zalogować się</a>.');
+    } else {
+      clearError(email);
+    }
+  })
+  .catch(error => {
+    console.error('Ошибка проверки e-mail:', error);
+    setError(email, 'Błąd połączenia z serwerem.');
+  });
+}
+
+
+  
+    registerButton.addEventListener('click', function (e) {
+      e.preventDefault();
+  
+      let hasError = false;
+  
+      if (!nameRegex.test(firstName.value.trim())) {
+        setError(firstName, 'Imię może zawierać tylko litery.');
+        hasError = true;
+      }
+  
+      if (!nameRegex.test(lastName.value.trim())) {
+        setError(lastName, 'Nazwisko może zawierać tylko litery.');
+        hasError = true;
+      }
+  
+      if (!emailRegex.test(email.value.trim())) {
+        setError(email, 'Wprowadź poprawny adres email.');
+        hasError = true;
+      }
+  
+      if (!passwordRegex.test(password.value.trim())) {
+        setError(password, 'Hasło musi mieć min. 8 znaków, cyfrę i znak specjalny.');
+        hasError = true;
+      }
+  
+      if (password.value.trim() !== confirmPassword.value.trim()) {
+        setError(confirmPassword, 'Hasła nie są takie same.');
+        hasError = true;
+      }
+  
+      if (!hasError) {
+        const userData = {
+          firstName: firstName.value.trim(),
+          lastName: lastName.value.trim(),
+          email: email.value.trim(),
+          password: password.value.trim()
+        };
+  
+        fetch('../Php_files/register.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(userData)
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('Rejestracja zakończona sukcesem!');
+            inputs.forEach(input => {
+              input.value = '';
+              clearError(input);
+            });
+          } else {
+            alert('Błąd: ' + data.message);
+          }
+        })
+        .catch(error => {
+          console.error('Ошибка:', error);
+          alert('Wystąpił problem z rejestracją.');
+        });
+      }
+    });
+  </script>
+  
+  
+  
+  
+<script src="../../header-scroll.js"></script>
+</body>
+</html>  
+  

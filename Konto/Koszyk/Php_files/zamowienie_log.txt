@@ -1,0 +1,3 @@
+2025-12-16 05:25:38 - Błąd przy składaniu zamówienia: Nie udało się pobrać ID nowego zamówienia.
+2025-12-16 05:26:41 - Błąd przy składaniu zamówienia: SQLSTATE[23000]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The INSERT statement conflicted with the FOREIGN KEY constraint "FK_zamowienia_produkty_products". The conflict occurred in database "dragon_world", table "dbo.Produkty", column 'id'.
+2025-12-16 05:26:44 - Błąd przy składaniu zamówienia: SQLSTATE[23000]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]The INSERT statement conflicted with the FOREIGN KEY constraint "FK_zamowienia_produkty_products". The conflict occurred in database "dragon_world", table "dbo.Produkty", column 'id'.

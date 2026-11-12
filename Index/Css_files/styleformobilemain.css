@@ -1,0 +1,897 @@
+@media (max-width: 768px) {
+
+body {
+  font-family: 'Julee', cursive;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden; 
+    background-color: rgba(169, 127, 130, 0.88);
+    
+}
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px 12px;
+  padding: 20px 5%;
+  box-sizing: border-box;
+  justify-content: flex-start;
+}
+
+header {
+  padding: 0;
+  background: url('Header.png') no-repeat center top;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 15vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.logo {
+  margin-left: -10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo span {
+  margin-top: 13px;
+  font-size: 2vw;
+}
+
+.logo img {
+  width: 8vw;
+  height: auto;
+  align-items: center;
+  text-align: center;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #1a1a1a;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.3);
+  z-index: 1;
+  border-radius: 8px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.dropdown-content a {
+  color: #f0f0f0;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-family: 'Julee', sans-serif;
+  transition: background 0.3s, color 0.3s;
+}
+
+.dropdown-content a:nth-child(odd):hover {
+  background-color: #333;
+  color: #ff0000; /* красный */
+  text-shadow: 0 0 5px #ff0000;
+}
+
+.dropdown-content a:nth-child(even):hover {
+  background-color: #333;
+  color: #00ff00; /* зелёный */
+  text-shadow: 0 0 5px #00ff00;
+}
+
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.search-container {
+  background: #ccc;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  width: 3300px;
+  max-width: 30%;
+  padding: 0 20px;
+  min-width: 332px;
+  min-height: 80px;
+}
+
+.search-container input {
+  font-family: 'Julee', cursive;
+  border: none;
+  outline: none;
+  background: transparent;
+  flex-grow: 1;
+  font-size: 1.5vw;
+  color: #555;
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.9vw;
+}
+
+.transparent-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-family: 'Julee', serif;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 10px 20px;
+  letter-spacing: 1px;
+}
+
+.header-item {
+  text-align: center;
+  margin-top: -4vw;
+  font-size: 2.5vw;
+}
+
+.hero-image {
+  position: relative; 
+  background: url('1212.png') no-repeat center center; 
+  background-size: cover; 
+  width: 100%;
+  height: 43.4vw; 
+  margin-top: 9vw;
+}
+
+.hero-image::before {
+  content: ''; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); 
+  z-index: 1; 
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+}
+
+.hero-text {
+  font-family: 'Julee', cursive;
+  margin-top: 10px;
+  padding: 5px;
+  font-size: 2.5vw;
+  color:#ccc;
+  position: relative; 
+  z-index: 2; 
+}
+
+.serdce i, .koszyk {
+  font-size: 2.5vw;
+}
+
+.ppp{
+  font-family: 'Julee', cursive;
+  padding-top: 5vw;
+}
+
+.red{
+  color: #D73435;
+}
+
+.green{
+  color: #649377;
+}
+
+.background_dla_slajdera{
+  height: 20.83vw;
+  background: #246952;
+}
+
+.slider {
+  overflow: hidden;
+  width: 100%; 
+  position: relative;
+  padding-top: 1.5vw;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.transparent-button {
+  margin-top: -100px;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 2.5vw;
+  cursor: pointer;
+  padding: 0;
+}
+
+.slide {
+  flex: 0 0 20%; 
+  margin-right: 10px;
+}
+
+.slide img {
+  width: 100%; 
+  display: block;
+  border-radius: 10px;
+}
+
+
+a {
+  color: black;         /* цвет текста ссылки */
+  text-decoration: none; /* убираем подчёркивание */
+}
+
+.card-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between; /* Centers the cards horizontally */
+  align-items: center;     /* Centers the cards vertically */
+  flex-wrap: wrap;         /* Allows wrapping when the screen size is smaller */
+  width: 90%;
+  padding: 10px 5%;
+  }
+  
+.card {
+  flex: 0 1 calc((100% - 36px) / 3);
+  box-sizing: border-box;
+  border-radius: 60px;
+  overflow: hidden;
+  background: #8D242E;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  position: relative;
+}
+
+/* Когда есть два элемента в контейнере, увеличиваем отступ между ними */
+.card-container:has(.card:nth-child(2):last-child) {
+  justify-content: flex-start;
+  padding-left: 6%;  /* Отступ слева у контейнера */
+  gap: 60px;           /* Отступ между карточками */
+}
+
+.card-container:has(.card:nth-child(2):last-child) .card {
+  max-width: calc(23% - 20px); /* Чтобы две карточки вместе заняли весь контейнер с отступами */
+  flex-basis: calc(23% - 20px);
+  margin: 0;
+}
+
+
+.card-container:has(.card:nth-child(3):last-child) {
+  justify-content: flex-start;
+  padding-left: 5%;  /* Отступ слева у контейнера */
+  gap: 30px;           /* Отступ между карточками */
+}
+
+.card-container:has(.card:nth-child(3):last-child) .card {
+  flex: 1 0 auto;      /* Фиксированная ширина */
+  max-width: 24%;      /* Можно подкорректировать ширину */
+  margin: 0;
+
+}
+
+
+.user-info-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Расстояние между именем и аватаркой */
+}
+
+.user-name {
+  white-space: nowrap; /* Чтобы имя не переносилось */
+}
+
+.card-link {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+}
+
+/* Сердце всегда видно */
+.favorite-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.2);
+  color: red;
+}
+
+
+
+.card img {
+  width: 100%;
+  height: auto;
+}
+
+.card-content {
+  padding: 8px;
+  color: rgb(0, 0, 0);
+}
+
+header .koszyk {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(80%, -25%);
+  background-color: #8D242E;
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.cart-count:empty {
+  display: none;
+} 
+
+.product-title {
+  padding-top: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2em;
+  
+  white-space: nowrap;       /* Не переносить */
+  overflow: hidden;          /* Скрыть всё, что не помещается */
+  text-overflow: ellipsis;   /* Показывать троеточие */
+}
+
+
+.product-price {
+  font-size: 2em;
+}
+
+.product-description {
+  font-size: 1vw;
+  color: #000000;
+  margin-top: 5px;
+  white-space: normal;      /* Разрешает переносы строк */
+  word-wrap: break-word;    /* Переносит слова, если они слишком длинные */
+  overflow-wrap: break-word; /* Поддержка для современных браузеров */
+}
+
+.container {
+background-color: #3a5c48;
+display: flex;
+max-width: 100%;
+}
+.form-box {
+align-items: center;
+flex: 1;
+display: flex; 
+flex-direction: column; 
+gap: 15px; 
+
+}
+
+.text {
+  margin-left: 17px;
+font-size: 3vw;
+margin-top: 0px;
+color: black;
+}
+
+.inputt {
+font-size: 1.5vw;
+width: 50%;
+height: 7%;
+padding: 10px;
+margin-bottom: 10px;
+border-radius: 35px;
+border: none;
+}
+
+.buttoon {
+width: 30%;
+height: 7%;
+background-color: #76B896;
+margin-bottom: 10px;
+border-radius: 35px;
+color: #000;
+font-weight: bold;
+cursor: pointer;
+}
+
+.dragon-img {
+width: 850px;
+}
+
+.inputt::placeholder {
+font-size: 1.5vw; 
+color: #888; 
+}
+
+.card {
+transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+transform: scale(1.05);
+}
+
+.footer {
+background-color: #ff9999;
+padding: 20px;
+text-align: center;
+}
+
+.footer-container {
+display: flex;
+justify-content: space-around;
+flex-wrap: wrap;
+padding: 10px;
+}
+
+.footer .social-icons {
+  margin-top: 15px;       /* отступ сверху — опускает иконки ниже заголовка */
+  display: flex;          /* ставит иконки в одну линию */
+  gap: 200px;              /* расстояние между иконками */
+}
+
+.footer-column {
+flex: 1;
+min-width: 200px;
+text-align: left;
+}
+
+.footer-column h3 {
+margin-bottom: 10px;
+font-weight: bold;
+}
+
+.footer-column p {
+margin: 5px 0;
+}
+
+.footer-links {
+  list-style: none; 
+  color: #000;    
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 6px;
+  text-decoration: none; 
+  color:#000;   
+}
+
+.footer-links li a {
+  margin-bottom: 6px;
+  text-decoration: none; 
+  color:#000;   
+}
+
+.footer-links a {
+  text-decoration: none; 
+  color: black;        
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #ff6600;        /* например, при наведении оранжевый */
+}
+
+.footer-column a {
+text-decoration: none;
+color: blue;
+}
+
+.footer .social-icons {
+  margin-top: 45px;       /* отступ сверху — опускает иконки ниже заголовка */
+  display: flex;          /* ставит иконки в одну линию */
+  gap: 20px;              /* расстояние между иконками */
+}
+
+.errormessage {
+color: rgb(255, 0, 0) !important;
+font-size: 1vw;
+margin-top: 0px;
+visibility: hidden;
+}
+
+.buttoon:active {
+background-color: #213922; 
+}
+
+
+}
+@media (max-width: 768px) {
+  header {
+    height: 15vw;
+    background-size: 100% auto;
+    justify-content: space-between;
+    padding: 0 10px;
+    flex-direction: row; 
+  }
+
+  .header-item {
+    text-align: center;
+    margin-top: -15vw;
+    font-size: 1vw;
+  }
+
+  .hero-image {
+    background: url('image2.png') no-repeat center center; /* Устанавливаем фоновое изображение */
+    background-size: cover; /* Убедитесь, что изображение покрывает весь контейнер */
+    width: 100%;
+    height: 50vw; /* Задаем фиксированную высоту в зависимости от ширины экрана */
+    margin-top: 9vw;
+  }
+
+    .logo img {
+      margin-top: 2vw;
+      width: 10vw;
+      height: 10vw;
+    }
+
+  .logo span {
+    margin-top: 5px;
+    font-size: 0vw;
+  }
+
+  .serdce, .koszyk {
+    font-size: 3vw;
+  }
+
+  .search-container {
+    background: #ccc; 
+    border-radius: 20px;
+    padding: 0px 0px; /* Добавлен более гибкий отступ */
+  }
+  
+
+  .search-container input {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex-grow: 1;
+    font-size: 2vw;
+    color: #555;
+  }
+
+  .transparent-button {
+    margin-top: -100px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-size: 3.5vw;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .hero-text {
+    padding: 5px;
+    font-size: 1vw;
+  }
+
+  .slider {
+    width: 100%;
+  }
+  .slide {
+    flex: 0 0 33%; /* Для мобильных устройств показываем 3 слайда */
+  }
+
+  .background_dla_slajdera{
+    height: 50.83vw;
+    background: #246952;
+  }
+
+  .slider {
+    overflow: hidden;
+    width: 100%; /* Контейнер на всю ширину */
+    position: relative;
+    padding-top: 3vw;
+  }
+
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Расстояние между карточками */
+    justify-content: center; /* Центрируем карточки по вертикали */
+    align-items: center; /* Центрируем карточки по горизонтали */
+    width: 100%;
+    max-width: 600px; /* Ограничиваем ширину */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.card {
+  display: block;
+  position: relative;
+  background: #8D242E;
+  margin-bottom: px; /* Уменьшено расстояние между карточками */
+  width: 100%; /* Карточка займет 100% ширины контейнера */
+  max-width: 800px; /* Максимальная ширина карточки */
+  height: auto; /* Даем карточке автоматически регулироваться по содержимому */
+  max-height: 400px; /* Устанавливаем максимальную высоту карточки */
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 0px; /* Уменьшаем отступы внутри карточки */
+  gap: 20px; /* Расстояние между элементами внутри карточки */
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    padding: 8px;
+    color: rgb(0, 0, 0);
+}
+
+.product-title {
+  position: relative;
+  top: -30px;  /* Поднимет заголовок выше */
+  text-align: center;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+
+.product-price {
+  position: relative;
+  top: -50px;  /* Поднимет заголовок выше */
+    font-size: 1em;
+}
+
+.product-description {
+  position: relative;
+  top: -50px;  /* Поднимет заголовок выше */
+  font-size: 5vw;
+  color: #000000; /* Цвет текста */
+  margin-top: px;
+}
+
+.container {
+  padding-top: 0; /* Убираем верхние отступы */
+  padding-bottom: 20px; /* Добавляем нижний отступ для формы */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Выровнять элементы формы сверху */
+  align-items: center;
+  background-color: #3a5c48;
+}
+
+/* Формируем блок с текстом */
+.form-box {
+  width: 90%; /* Форма будет занимать 90% от ширины экрана */
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px; /* Добавляем отступ сверху */
+}
+
+.form-box h2 {
+  font-size: 4vw; /* Адаптивный размер текста */
+  margin-top: 0; /* Убираем верхний отступ */
+  font-style: italic;
+  text-align: center;
+}
+
+/* Форматируем элементы ввода */
+.inputt {
+  width: 100%; /* Сделаем кнопки и инпуты по ширине */
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 35px;
+  border: none;
+  font-size: 3vw; /* Увеличиваем шрифт для удобства ввода */
+}
+
+.dragon-img {
+  display: none; /* Скрыть изображение дракона на мобильных устройствах */
+}
+
+
+.buttoon {
+  width: 50%;
+  background-color: #76B896;
+  margin-bottom: 10px;
+  border-radius: 35px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.text {
+font-size: 40vw;
+margin-top: 0px;
+color: black;
+}
+
+.form-box h2 {
+font-size: 5vw; /* Адаптивный размер текста */
+margin-top: 0; /* Убираем верхний отступ */
+margin-left: 0;
+text-align: left;
+}
+
+.inputt::placeholder {
+font-size: 5vw; /* Увеличенный размер шрифта */
+color: #888; /* Можно изменить цвет */
+
+}
+
+.card {
+transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+transform: scale(1.05);
+}
+
+
+
+}
+
+
+@media (max-width: 480px) {
+  header {
+    height: 25vw;
+    background-size: 140% auto;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+
+    .slider {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      padding-top: 3vw;
+    }
+  
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 100%; /* Обеспечиваем, что все слайды вместе занимают 100% ширины */
+    }
+  
+    .slide {
+      flex: 0 0 50%; /* Каждому слайду даем 50% ширины, чтобы показывать 2 слайда на экране */
+      margin-right: 10px; /* Добавляем небольшой отступ между слайдами */
+      box-sizing: border-box; /* Включаем в расчёт отступы и паддинги */
+    }
+
+  .background_dla_slajdera{
+    height: 50.83vw;
+    background: #246952;
+  }
+
+  .header-item {
+    text-align: center;
+    margin-top: -12vw;
+    font-size: 3.5vw;
+  }
+
+    .search-container {
+    display: flex;
+    align-items: center;
+    width: 8%;  /* Use 80% to make it more flexible */
+    padding: 0px 0px;  /* Adjust padding to make it less stretched */
+    margin-top: -12vw;
+    min-width: 130px;  /* Keep a reasonable minimum width */
+    min-height: 20px;
+  }
+
+  .serdce, .koszyk {
+    font-size: 3vw;
+  }
+
+  .koszyk{
+    margin-right: 20px;
+  }
+
+  .hero-image {
+    background: url("image2.png") no-repeat center center;
+    background-size: cover;
+    margin-top: 12vw;
+    height: 60vh;
+  }
+  
+  .logo img {
+    max-width: 10vw;
+    height: auto;
+  }
+  
+  .hero-text {
+    padding: 10px;
+    font-size: 4vw;
+    color: #ffffff;
+  }
+
+  .card-container {
+    display: flex;
+    flex-direction: column; /* Располагаем карточки вертикально */
+    align-items: center; /* Центрируем карточки */
+    gap: 20px; /* Отступ между карточками */
+    width: 100%; /* Полная ширина */
+    padding: 20px 5%; /* Отступы */
+}
+
+
+  .card {
+    width: 80%; /* Ограничиваем ширину карточек */
+    max-width: 400px; /* Максимальная ширина */
+}
+}
+
+
+header .search-container {
+  min-height: 80px;
+  height: 80px;
+  padding: 0 20px;
+  border-radius: 40px;
+  box-sizing: border-box;
+}
+header.scrolled .search-container {
+  min-height: 42px;
+  height: 42px;
+  padding: 0 14px;
+}
+/* one search field size on every page */
+header .search-container {
+  flex: 1 1 300px !important;
+  width: auto !important;
+  max-width: 38% !important;
+  min-width: 250px !important;
+  height: 60px !important;
+  min-height: 60px !important;
+  margin-top: -4vw !important;
+  align-self: center !important;
+  padding: 0 18px !important;
+  border-radius: 24px !important;
+  box-sizing: border-box !important;
+  background: #ccc !important;
+}
+header.scrolled .search-container {
+  margin-top: 0 !important;
+  height: 50px !important;
+  min-height: 50px !important;
+  max-width: 38% !important;
+}

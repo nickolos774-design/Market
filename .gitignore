@@ -1,0 +1,18 @@
+# Local secrets. Copy the example files and fill them in on each machine.
+/secure/config.php
+/OpenAI/.env
+
+# Installed packages. Restore with composer install and npm install.
+/vendor/
+/node_modules/
+/OpenAI/node_modules/
+
+# User uploads stay on this machine.
+/Konto/Moje dane/Php_files/uploads/
+
+# OS and editor junk
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.log
+~$*
